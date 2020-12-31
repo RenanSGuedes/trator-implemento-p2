@@ -1,6 +1,6 @@
-from math import cos, tan, atan
+from math import cos, tan, atan, radians
 
-# todo Carga Estática
+# todo Carga Dinâmica - Em movimento com solo em determinada inclinação (alpha)
 
 '''
 /**
@@ -75,3 +75,32 @@ yg = (xf - z)/tan(beta)
 
 
 print("(Em relação à roda traseira) yg = {:.2f}m\n=> (Em relação ao solo) ygt = {:.2f}\nz = {:.2f}m\nxrl = {:.2f}m".format(yg, yg + rr,z, xrl))
+
+# todo Resumo de cargas estáticas
+
+questionAboutTheta = input("Theta é nulo? [S]im ou [N]ão: ")
+questionAboutP = input("P é nula? [S]im ou [N]ão: ")
+questionAboutAlpha = input("Alpha é nulo? [S]im ou [N]ão: ")
+
+if questionAboutTheta == "S":
+  theta = 0
+
+if questionAboutP == "S":
+  p = 0
+
+if questionAboutAlpha == "S":
+  alpha = 0
+
+# * Quando theta = 0°
+  # | A força do implemento é paralela ao solo, logo
+
+if theta == 0:
+  vf = w * cos(radians(alpha)) * (xr/x) - w * sin(radians(alpha)) * (rr + yg/x) - p * (yl/x)
+  vr = w * cos(radians(alpha)) * (xf/x) - w * sin(radians(alpha)) * (rr + yg/x) + p * (yl/x)
+elif alpha == 0:
+  vf = wf - (P * yl)/x
+  vr = wf + (P * yl)/x
+else: # * Quando p = 0 
+  vf = wf
+  vr = wf
+
