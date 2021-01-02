@@ -1,4 +1,4 @@
-from math import exp
+from math import exp, sqrt 
 
 '''
 /**
@@ -15,6 +15,7 @@ from math import exp
 * * MR = Força de resistência ao movimento
 * * wd = Carga dinâmica no pneu
 * * TRR = Taxa de redução da viagem
+* * MRR = Coeficiente de resistência ao rolamento
 * * Índice de mobilidade
 * ? Cálculo do TE
 * | TE (ratio) = OutputPower/InputPower = (NT * va)/AxlePower
@@ -30,17 +31,16 @@ from math import exp
 * ? Para cada Bn há uma eficiência TE associada.
 * todo Visando aumentar a eficiência, a melhor alternativa é modificar
 * todo a carga dinâmica (wd), logo
-* | wd = wr + wl (wl, lastro)
+* | wd = wr (cte) + wl (wl, peso, lastro - pode ser modificado)
 * * S = Patinagem
 * | Bn = (CI * b * d)/wd * (1 + 5 * (add/h)) / (1 + 3 * (b/d))
 * * add = Deformação
-* * W = Carga dinâmica
 * * h = Altura do rodado
 * * b = Largura do pneu
 * * Diâmetro do pneu
 * * CI = Índice de cone (característica do solo) -> Resistência do solo à penetração
 * * de um cone.
-* | MRR = GTR - NTR
+* | MRR = MR/wd = GTR - NTR = (1/Bn) + 0.4 + (0.5 * S)/sqrt(Bn)
 */
 '''
 
