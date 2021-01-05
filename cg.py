@@ -1,4 +1,4 @@
-from math import cos, tan, atan
+from math import cos, tan, atan, degrees
 
 # todo Carga Estática
 
@@ -8,7 +8,7 @@ from math import cos, tan, atan
 * ? Peso do trator: w
 * ? Distância entre eixos: x
 * todo Relação:
-* | w * xf = wf * xr
+* | w * xr = wf * x
 * ? xr = distância horizontal do CG ao eixo traseiro
 * ? xf = distância horizontal do CG ao eixo dianteiro
 */
@@ -32,8 +32,8 @@ wr = float(input("Peso do eixo traseiro apoiado (wr, kg): "))
 */
 '''
 
-xf = (wf/w) * x
-xr = x - xf
+xr = (wf/w) * x
+xf = x - xr
 print("(Distância do CG ao eixo dianteiro) xf = {:.2f}m\n(Distância do CG ao eixo traseiro) xr = {:.2f}m".format(xf, xr)) 
 
 '''
@@ -44,7 +44,7 @@ print("(Distância do CG ao eixo dianteiro) xf = {:.2f}m\n(Distância do CG ao e
 * ? yl = distância vertical do solo ao eixo da roda inclinada
 * ? wfl = peso da roda dianteira inclinada
 * ? xll = distância entre eixos com o trator inclinado
-* ? yg = Altura y do CG
+* ? yg = Altura y do CG em relação ao eixo traseiro (o CG nesse caso está acima do eixo traseiro)
 */
 '''
 
@@ -68,10 +68,15 @@ h = float(input("Altura do apoio para o trator inclinado (h, em m): "))
 
 yl = rf + h
 beta = atan((rr - rf)/x) + atan((yl - rr)/xll) # ? Valor em radianos
-
 xrl = wfl * xll / w
 z = xrl/cos(beta)
-yg = (xf - z)/tan(beta)
+yg = (xr - z)/tan(beta)
+ygt = yg + rr
 
+print(20 * "-")
+print("beta = {:.2f}°".format(degrees(beta)))
+print("z = {:.2f} m".format(z))
+print("xrl = {:.2f} m".format(xrl))
+print(20 * "-")
 
-print("(Em relação à roda traseira) yg = {:.2f}m\n=> (Em relação ao solo) ygt = {:.2f}\nz = {:.2f}m\nxrl = {:.2f}m".format(yg, yg + rr,z, xrl))
+print("(Em relação ao eixo da roda traseira) yg = {:.2f} m\n=> (Em relação ao solo) ygt = {:.2f} m".format(yg, ygt))
