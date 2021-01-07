@@ -55,28 +55,24 @@ S = float(input('Patinagem (de 0 a 1): '))
 
 Bn = (ci * b * d)/(wd/1000) * (1 + 5 * (add/h)) / (1 + 3 * (b/d))
 
-
-
 print("Bn = {:.2f}".format(Bn))
 
 mrr = 1/Bn + .04 + .5 * S/sqrt(Bn)
 
 mr = mrr * (wd/1000)
 
-print("(Força de resistência ao rolamento) MRR = {:.2f}\n(Coeficiente de resistência ao rolamento) MR = {:.2f} kN".format(mrr, mr))
+print("(Coeficiente de resistência ao rolamento) MRR = {:.2f}\n(Força de resistência ao rolamento) MR = {:.2f} kN".format(mrr, mr))
 
 # * gtr = Q/(r * wd) = 0.88 * (1 - exp(-0.1 * Bn)) * (1 - exp(-7.5 * S)) + 0.04
 
 coefTracao = float(input('Coeficiente de tração: (de 0 a 1): '))
 
-coefTracao = gtr
-
+gtr = coefTracao
 gt = gtr * (wd/1000)
-
 nt = gt - mr
 
-print("(Tração total/Força de tração máxima) [eixo] GT = {:.2f}".format(gt))
-print("(Força no eixo/máxima força disponível) [pneu] NT = {:.2f}".format(nt))
+print("(Tração total/Força de tração máxima) [eixo] GT = {:.2f} kN".format(gt))
+print("(Força no eixo/máxima força disponível) [pneu] NT = {:.2f} kN".format(nt))
 
 '''
   /**
@@ -95,9 +91,9 @@ largura = float(input("Largura do implemento (em m)/Número de ferramentas: "))
 profundidade = float(input("Profundidade de trabalho (t, em cm): "))
 velocidade = float(input("Velocidade de operação (km/h): "))
 
-D = f * (a + b * velocidade + c * velocidade**(2)) * largura * profundidade
+D = f * (a + b * velocidade + c * velocidade**(2)) * largura * profundidade # * Em Newton
 
-kwb = D * velocidade
+kwb = D * (velocidade/3.6)
 
-print("D = {:.2f} kN".format(D))
-print("KWB = {:.2f} kN".format(kwb))
+print("D = {:.2f} kN".format(D/1000))
+print("KWB = {:.2f} kN".format(kwb/1000))
